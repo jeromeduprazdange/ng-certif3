@@ -1,0 +1,36 @@
+<div class="card flex-row justify-content-between">
+  <div>
+    <h3>{{ weatherInfo.cityName }} ({{ weatherInfo.zipCode }})</h3>
+    <h4>Current conditions: {{ weatherInfo.currentConditions }}</h4>
+    <h4>Temperatures today:</h4>
+    <p>
+      Current {{ weatherInfo.currentTemp | number : "1.0-0" }} - Max
+      {{ weatherInfo.maxTemp | number : "1.0-0" }} - Min
+      {{ weatherInfo.minTemp | number : "1.0-0" }}
+    </p>
+    <p>
+      <a [routerLink]="['/forecast', weatherInfo.zipCode]"
+        >Show 5-day forecast for {{ weatherInfo.cityName }}</a
+      >
+    </p>
+  </div>
+  <div class="d-flex">
+    <img
+      *ngIf="weatherInfo.currentConditions === 'Clear'"
+      src="https://www.angulartraining.com/images/weather/sun.png"
+    />
+    <img
+      *ngIf="weatherInfo.currentConditions === 'Clouds'"
+      src="https://www.angulartraining.com/images/weather/clouds.png"
+    />
+    <img
+      *ngIf="weatherInfo.currentConditions === 'Rain'"
+      src="https://www.angulartraining.com/images/weather/rain.png"
+    />
+    <img
+      *ngIf="weatherInfo.currentConditions === 'Snow'"
+      src="https://www.angulartraining.com/images/weather/snow.png"
+    />
+    <span class="close" (click)="onClickDelete(weatherInfo)">×</span>
+  </div>
+</div>

@@ -1,0 +1,16 @@
+<button
+  type="button"
+  (click)="onClick()"
+  [ngClass]="currentClasses"
+  [disabled]="isDisabled"
+>
+  <ng-container [ngTemplateOutlet]="currentTemplate"></ng-container>
+
+  <ng-template #idleDefault>Save</ng-template>
+
+  <ng-template #workingDefault>
+    <app-loader></app-loader>
+  </ng-template>
+
+  <ng-template #doneDefault>Done</ng-template>
+</button>

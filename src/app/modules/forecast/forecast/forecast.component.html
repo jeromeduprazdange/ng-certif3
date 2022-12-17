@@ -1,0 +1,15 @@
+<div class="container-fluid">
+  <div class="card">
+    <h3>5-day forecast for {{ forecastWeatherList[0].cityName }}</h3>
+
+    <div>
+      <app-forecast-weather-list-item
+        *ngFor="let forecastWeather of forecastWeatherList"
+        [forecastInfo]="forecastWeather"
+      ></app-forecast-weather-list-item>
+    </div>
+  </div>
+  <button class="btn btn-success" tabindex="0" id="mainPageBtn" routerLink="/">
+    &lt; Back to main page
+  </button>
+</div>

@@ -1,0 +1,28 @@
+<div
+  class="dropdown-container"
+  (mouseenter)="onSelectMouseEnter()"
+  (mouseleave)="onSelectMouseLeave()"
+>
+  <input
+    [formControl]="countryControl"
+    class="form-control"
+    placeholder="Country"
+    type="text"
+    (focus)="onFocus()"
+  />
+
+  <div *ngIf="isOptionsContainerOpen | async" class="options-container">
+    <ul>
+      <li
+        *ngFor="let country of filteredCountries"
+        (click)="setSelectedCountry(country)"
+        class="option-item"
+      >
+        <app-select-option
+          [text]="country.name"
+          [search]="search"
+        ></app-select-option>
+      </li>
+    </ul>
+  </div>
+</div>

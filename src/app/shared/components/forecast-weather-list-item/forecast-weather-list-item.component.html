@@ -1,0 +1,23 @@
+<div class="card flex-row justify-content-between align-items-center">
+  {{ forecastInfo.date | date : "EEEE, MMM dd" }}:
+  {{ forecastInfo.conditions }} - Min:
+  {{ forecastInfo.minTemp | number : "1.0-0" }} - Max:
+  {{ forecastInfo.maxTemp | number : "1.0-0" }}
+
+  <img
+    *ngIf="forecastInfo.conditions === 'Clear'"
+    src="https://www.angulartraining.com/images/weather/sun.png"
+  />
+  <img
+    *ngIf="forecastInfo.conditions === 'Clouds'"
+    src="https://www.angulartraining.com/images/weather/clouds.png"
+  />
+  <img
+    *ngIf="forecastInfo.conditions === 'Rain'"
+    src="https://www.angulartraining.com/images/weather/rain.png"
+  />
+  <img
+    *ngIf="forecastInfo.conditions === 'Snow'"
+    src="https://www.angulartraining.com/images/weather/snow.png"
+  />
+</div>

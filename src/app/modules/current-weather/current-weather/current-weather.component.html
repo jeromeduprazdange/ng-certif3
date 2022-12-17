@@ -1,0 +1,42 @@
+<div class="container-fluid">
+  <div class="card">
+    <h2>Enter a country and a zipcode:</h2>
+    <form [formGroup]="locationForm" (ngSubmit)="submit()">
+      <input
+        class="form-control"
+        placeholder="Zipcode"
+        type="text"
+        id="addLocation"
+        formControlName="zipCode"
+      />
+      <br />
+      <app-auto-filtering-country-select
+        formControlName="country"
+      ></app-auto-filtering-country-select>
+      <br />
+      <app-state-button
+        name="saveLocationAction"
+        [disabled]="!locationForm.valid"
+        workingClasses="btn btn-primary"
+        (clickEvent)="submit()"
+      >
+        <ng-template #idle>Add location</ng-template>
+        <ng-template #working>Adding...</ng-template>
+        <ng-template #done
+          ><img
+            src="assets/icons/check2-circle.svg"
+            class="circle-check-icon"
+          />Done</ng-template
+        >
+      </app-state-button>
+    </form>
+  </div>
+  <div class="d-flex flex-column">
+    <app-current-weather-list-item
+      *ngFor="let currentWeather of currentWeatherList"
+      [weatherInfo]="currentWeather"
+      (deleteEvent)="deleteItem($event)"
+      >test</app-current-weather-list-item
+    >
+  </div>
+</div>
