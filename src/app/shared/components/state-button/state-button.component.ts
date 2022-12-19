@@ -8,7 +8,6 @@ import {
   TemplateRef,
   ViewChild,
 } from '@angular/core';
-import { Observable } from 'rxjs';
 import { ButtonActionsService } from 'src/app/core/services/button-actions.service';
 import { ButtonState } from '../../../core/enums/button-state.enum';
 
@@ -18,7 +17,7 @@ import { ButtonState } from '../../../core/enums/button-state.enum';
   styleUrls: ['./state-button.component.scss'],
 })
 export class StateButtonComponent implements OnInit {
-  @Input() actionObservable!: Observable<any>;
+  @Input() name!: string;
   @Input() idleClasses: string = 'btn btn-primary';
   @Input() workingClasses: string = 'btn btn-working';
   @Input() doneClasses: string = 'btn btn-done';
@@ -45,13 +44,13 @@ export class StateButtonComponent implements OnInit {
 
   ngOnInit(): void {
     this.buttonActionsService.actionsState
-      .find((action: any) => (action.name = 'saveZipCodeAction'))
+      .find((action: any) => (action.name = this.name))
       ?.state.subscribe((state) => {
         this.currentState = state;
 
         if (state !== ButtonState.IDLE) {
           setTimeout(() => {
-            this.currentState = ButtonState.IDLE;
+            this.resetButton();
           }, this.resetTimeout);
         }
       });
@@ -80,5 +79,9 @@ export class StateButtonComponent implements OnInit {
 
   get isDisabled(): boolean {
     return this.currentState !== ButtonState.IDLE || this.disabled;
+  }
+
+  private resetButton(): void {
+    this.buttonActionsService.setState(this.name, ButtonState.IDLE);
   }
 }
