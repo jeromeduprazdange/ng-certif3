@@ -10,7 +10,7 @@ const routes: Routes = [
       ),
   },
   {
-    path: 'forecast/:zipCode',
+    path: 'forecast/:countryCode/:zipCode',
     loadChildren: () =>
       import(`./modules/forecast/forecast.module`).then(
         (m) => m.ForecastModule

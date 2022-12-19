@@ -89,10 +89,10 @@ export class WeatherService {
     localStorage.setItem('locations', JSON.stringify(locationsArray));
   }
 
-  getForecastByZipCode(zipCode: string): Observable<ForecastInfo> {
+  getForecast(countryCode: string, zipCode: string): Observable<ForecastInfo> {
     return this.http
       .get(
-        `${environment.forecastUrl}?zip=${zipCode},fr&units=metric&cnt=5&appid=${environment.weatherApiKey}`
+        `${environment.forecastUrl}?zip=${zipCode},${countryCode}&units=metric&cnt=5&appid=${environment.weatherApiKey}`
       )
       .pipe(
         map((result: any) => {

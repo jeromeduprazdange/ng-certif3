@@ -17,14 +17,13 @@ export class ForecastResolver implements Resolve<boolean> {
   ) {}
 
   resolve(route: ActivatedRouteSnapshot): Observable<any> {
-    return this.weatherService
-      .getForecastByZipCode(route.params['zipCode'])
-      .pipe(
-        catchError((error) => {
-          this.router.navigate(['/']);
-          this.toastr.error(capitalize(error.error.message), 'Error');
-          return of(null);
-        })
-      );
+    const { countryCode, zipCode } = route.params;
+    return this.weatherService.getForecast(countryCode, zipCode).pipe(
+      catchError((error) => {
+        this.router.navigate(['/']);
+        this.toastr.error(capitalize(error.error.message), 'Error');
+        return of(null);
+      })
+    );
   }
 }
